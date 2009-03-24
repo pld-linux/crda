@@ -6,7 +6,6 @@ License:	ISC
 Group:		Networking/Daemons
 Source0:	http://wireless.kernel.org/download/crda/%{name}-%{version}.tar.bz2
 # Source0-md5:	03554b71eef2626795befa17eb1d8b9e
-Source1:	http://wireless.kernel.org/download/wireless-regdb/wireless-regdb-2009.03.09.tar.bz2
 BuildRequires:	libgcrypt-devel
 BuildRequires:	libnl-devel
 BuildRequires:	python
@@ -24,7 +23,7 @@ communication from the kernel. The user should never have to run it
 manually except if debugging udev issues.
 
 %prep
-%setup -q -a1
+%setup -q
 
 %build
 %{__make} \
