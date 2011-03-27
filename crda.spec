@@ -1,13 +1,13 @@
 Summary:	udev helper: Central Regulatory Domain Agent
 Name:		crda
-Version:	1.0.1
-Release:	3
+Version:	1.1.1
+Release:	1
 License:	ISC
 Group:		Networking/Daemons
 Source0:	http://wireless.kernel.org/download/crda/%{name}-%{version}.tar.bz2
-# Source0-md5:	03554b71eef2626795befa17eb1d8b9e
+# Source0-md5:	5fc77af68b3e21736b8ef2f8b061c810
 BuildRequires:	libgcrypt-devel
-BuildRequires:	libnl-devel
+BuildRequires:	libnl-devel >= 1:3.0
 BuildRequires:	python
 BuildRequires:	python-M2Crypto
 BuildRequires:	wireless-regdb
@@ -25,9 +25,13 @@ manually except if debugging udev issues.
 %prep
 %setup -q
 
+sed -i -e 's#libnl-2#libnl-3#g' Makefile
+
 %build
 %{__make} \
-	CFLAGS="%{rpmcflags} %{rpmcppflags}" \
+	V=1 \
+	CC="%{__cc}" \
+	CFLAGS="%{rpmcflags} %{rpmcppflags} -DCONFIG_LIBNL20=1" \
 	REG_BIN=%{_datadir}/crda/regulatory.bin
 
 %install
