@@ -1,7 +1,7 @@
 Summary:	udev helper: Central Regulatory Domain Agent
 Name:		crda
 Version:	1.1.1
-Release:	1
+Release:	2
 License:	ISC
 Group:		Networking/Daemons
 Source0:	http://wireless.kernel.org/download/crda/%{name}-%{version}.tar.bz2
