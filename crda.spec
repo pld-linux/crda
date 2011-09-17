@@ -1,7 +1,7 @@
 Summary:	udev helper: Central Regulatory Domain Agent
 Name:		crda
 Version:	1.1.1
-Release:	2
+Release:	3
 License:	ISC
 Group:		Networking/Daemons
 Source0:	http://wireless.kernel.org/download/crda/%{name}-%{version}.tar.bz2
@@ -25,13 +25,13 @@ manually except if debugging udev issues.
 %prep
 %setup -q
 
-sed -i -e 's#libnl-2#libnl-3#g' Makefile
+sed -i -e 's#libnl-2#libnl-3#g' -e 's#-lnl-genl#-lnl-genl-3#g' Makefile
 
 %build
 %{__make} \
 	V=1 \
 	CC="%{__cc}" \
-	CFLAGS="%{rpmcflags} %{rpmcppflags} -DCONFIG_LIBNL20=1" \
+	CFLAGS="%{rpmcflags} %{rpmcppflags} -DCONFIG_LIBNL20=1 `pkg-config --cflags libnl-3.0`" \
 	REG_BIN=%{_datadir}/crda/regulatory.bin
 
 %install
