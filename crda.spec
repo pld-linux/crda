@@ -1,11 +1,12 @@
 Summary:	udev helper: Central Regulatory Domain Agent
 Name:		crda
 Version:	1.1.2
-Release:	1
+Release:	2
 License:	ISC
 Group:		Networking/Daemons
 Source0:	http://linuxwireless.org/download/crda/%{name}-%{version}.tar.bz2
 # Source0-md5:	5226f65aebacf94baaf820f8b4e06df4
+Patch0:		nl3.patch
 BuildRequires:	libgcrypt-devel
 BuildRequires:	libnl-devel >= 1:3.0
 BuildRequires:	python
@@ -24,6 +25,7 @@ manually except if debugging udev issues.
 
 %prep
 %setup -q
+%patch0 -p1
 
 %build
 %{__make} \
