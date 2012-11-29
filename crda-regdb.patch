@@ -1,0 +1,10 @@
+--- crda-1.1.2/crda.c~	2011-08-10 01:36:19.000000000 +0200
++++ crda-1.1.2/crda.c	2012-11-29 09:50:45.474098384 +0100
+@@ -165,6 +165,7 @@
+ 	const char *regdb_paths[] = {
+ 		"/usr/local/lib/crda/regulatory.bin", /* Users/preloads can override */
+ 		"/usr/lib/crda/regulatory.bin", /* General distribution package usage */
++		"/usr/share/crda/regulatory.bin",
+ 		"/lib/crda/regulatory.bin", /* alternative for distributions */
+ 		NULL
+ 	};
