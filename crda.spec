@@ -1,7 +1,8 @@
 #
 # Conditional build:
 %bcond_without	verify	# don't verify database
-#
+%bcond_without	verbose	# verbose build (V=1)
+
 Summary:	udev helper: Central Regulatory Domain Agent
 Summary(pl.UTF-8):	Program pomocniczy udev: Central Regulatory Domain Agent
 Name:		crda
@@ -18,6 +19,7 @@ BuildRequires:	libnl-devel >= 1:3.2
 BuildRequires:	pkgconfig
 BuildRequires:	python
 BuildRequires:	python-M2Crypto
+BuildRequires:	python-modules
 %{?with_verify:BuildRequires:	wireless-regdb}
 Requires:	udev-core
 Requires:	wireless-regdb
@@ -43,15 +45,19 @@ nie powinien wywoływać go ręcznie, chyba że w celach diagnostyki udev.
 
 %build
 CFLAGS="%{rpmcflags} %{rpmcppflags}" \
-%{__make} %{!?with_verify:all_noverify} \
-	V=1 \
+%{__make} \
 	CC="%{__cc}" \
-	REG_BIN=%{_datadir}/crda/regulatory.bin
+	%{?with_verbose:V=1} \
+%if %{with verify}
+	REG_BIN=%{_datadir}/crda/regulatory.bin \
+%else
+	all_noverify \
+%endif
 
 %install
 rm -rf $RPM_BUILD_ROOT
-
 %{__make} install \
+	%{?with_verbose:V=1} \
 	DESTDIR=$RPM_BUILD_ROOT
 
 %clean
