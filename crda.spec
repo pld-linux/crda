@@ -1,13 +1,13 @@
 #
 # Conditional build:
-%bcond_without	verify	# don't verify database
+%bcond_with	verify	# don't verify database
 %bcond_without	verbose	# verbose build (V=1)
 
 Summary:	udev helper: Central Regulatory Domain Agent
 Summary(pl.UTF-8):	Program pomocniczy udev: Central Regulatory Domain Agent
 Name:		crda
 Version:	1.1.3
-Release:	3
+Release:	4
 License:	ISC
 Group:		Networking/Daemons
 Source0:	http://linuxwireless.org/download/crda/%{name}-%{version}.tar.bz2
