@@ -1,0 +1,11 @@
+--- crda-3.13/Makefile.orig	2014-02-09 14:56:57.600129540 +0100
++++ crda-3.13/Makefile	2014-02-09 15:02:37.646781938 +0100
+@@ -115,7 +115,7 @@
+ 
+ $(LIBREG): regdb.h reglib.h reglib.c
+ 	$(NQ) '  CC  ' $@
+-	$(Q)$(CC) $(CFLAGS) $(CPPFLAGS) -o $@ -shared -Wl,-soname,$(LIBREG) $^
++	$(Q)$(CC) $(CFLAGS) $(CPPFLAGS) -o $@ -shared -Wl,-soname,$(LIBREG) $^ $(LDLIBS)
+ 
+ install-libreg-headers:
+ 	$(NQ) '  INSTALL  libreg-headers'

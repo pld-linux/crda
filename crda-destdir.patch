@@ -1,0 +1,22 @@
+--- crda-3.13/Makefile.orig	2013-11-20 13:12:54.000000000 +0100
++++ crda-3.13/Makefile	2014-02-09 14:55:48.603465772 +0100
+@@ -119,14 +119,14 @@
+ 
+ install-libreg-headers:
+ 	$(NQ) '  INSTALL  libreg-headers'
+-	$(Q)mkdir -p $(INCLUDE_DIR)
+-	$(Q)cp *.h $(INCLUDE_DIR)/
++	$(Q)mkdir -p $(DESTDIR)$(INCLUDE_DIR)
++	$(Q)cp *.h $(DESTDIR)$(INCLUDE_DIR)/
+ 
+ install-libreg:
+ 	$(NQ) '  INSTALL  libreg'
+-	$(Q)mkdir -p $(LIBDIR)
+-	$(Q)cp $(LIBREG) $(LIBDIR)/
+-	$(Q)ldconfig
++	$(Q)mkdir -p $(DESTDIR)$(LIBDIR)
++	$(Q)cp $(LIBREG) $(DESTDIR)$(LIBDIR)/
++	$(Q)-ldconfig
+ 
+ %.o: %.c regdb.h $(LIBREG)
+ 	$(NQ) '  CC  ' $@
