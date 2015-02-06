@@ -6,12 +6,12 @@
 Summary:	udev helper: Central Regulatory Domain Agent
 Summary(pl.UTF-8):	Program pomocniczy udev: Central Regulatory Domain Agent
 Name:		crda
-Version:	3.13
+Version:	3.18
 Release:	1
 License:	ISC
 Group:		Networking/Daemons
 Source0:	https://www.kernel.org/pub/software/network/crda/%{name}-%{version}.tar.xz
-# Source0-md5:	66b1b0417c1ad19f0009a5c0c0c1aebc
+# Source0-md5:	0431fef3067bf503dfb464069f06163a
 Patch0:		%{name}-regdb.patch
 Patch1:		%{name}-destdir.patch
 Patch2:		%{name}-link.patch

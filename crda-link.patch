@@ -1,11 +1,44 @@
---- crda-3.13/Makefile.orig	2014-02-09 14:56:57.600129540 +0100
-+++ crda-3.13/Makefile	2014-02-09 15:02:37.646781938 +0100
-@@ -115,7 +115,7 @@
+--- crda-3.18/Makefile.orig	2015-02-06 21:24:01.990986095 +0100
++++ crda-3.18/Makefile	2015-02-06 21:24:21.404318610 +0100
+@@ -29,8 +29,7 @@
+ CFLAGS += -std=gnu99 -Wall -Werror -pedantic
+ CFLAGS += -Wall -g
+ LDLIBREG += -lreg
+-LDLIBS += $(LDLIBREG)
+-LDLIBS += -lm
++LIBLIBS += -lm
+ LIBREG += libreg.so
+ LDFLAGS += -L ./
+ 
+@@ -40,17 +39,20 @@
+ 
+ ifeq ($(USE_OPENSSL),1)
+ CFLAGS += -DUSE_OPENSSL -DPUBKEY_DIR=\"$(RUNTIME_PUBKEY_DIR)\" `pkg-config --cflags openssl`
+-LDLIBS += `pkg-config --libs openssl`
++LIBLIBS += `pkg-config --libs openssl`
+ 
+ $(LIBREG): keys-ssl.c
+ 
+ else
+ CFLAGS += -DUSE_GCRYPT
+-LDLIBS += -lgcrypt
++LIBLIBS += -lgcrypt
+ 
+ $(LIBREG): keys-gcrypt.c
+ 
+ endif
++LDLIBS += $(LIBLIBS)
++LDLIBS += $(LDLIBREG)
++
+ MKDIR ?= mkdir -p
+ INSTALL ?= install
+ 
+@@ -116,7 +118,7 @@
  
  $(LIBREG): regdb.h reglib.h reglib.c
  	$(NQ) '  CC  ' $@
 -	$(Q)$(CC) $(CFLAGS) $(CPPFLAGS) -o $@ -shared -Wl,-soname,$(LIBREG) $^
-+	$(Q)$(CC) $(CFLAGS) $(CPPFLAGS) -o $@ -shared -Wl,-soname,$(LIBREG) $^ $(LDLIBS)
++	$(Q)$(CC) $(CFLAGS) $(CPPFLAGS) -o $@ -shared -Wl,-soname,$(LIBREG) $^ $(LIBLIBS)
  
  install-libreg-headers:
  	$(NQ) '  INSTALL  libreg-headers'
