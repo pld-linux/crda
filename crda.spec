@@ -7,11 +7,13 @@ Summary:	udev helper: Central Regulatory Domain Agent
 Summary(pl.UTF-8):	Program pomocniczy udev: Central Regulatory Domain Agent
 Name:		crda
 Version:	3.18
-Release:	2
+Release:	3
 License:	ISC
 Group:		Networking/Daemons
 Source0:	https://www.kernel.org/pub/software/network/crda/%{name}-%{version}.tar.xz
 # Source0-md5:	0431fef3067bf503dfb464069f06163a
+Source1:	https://git.kernel.org/pub/scm/linux/kernel/git/wens/wireless-regdb.git/plain/wens.key.pub.pem
+# Source1-md5:	11522c524aa619d6031b73edd02e8071
 Patch0:		%{name}-regdb.patch
 Patch1:		%{name}-destdir.patch
 Patch2:		%{name}-link.patch
@@ -74,6 +76,8 @@ Pliki nagłówkowe biblioteki CRDA libreg.
 %patch1 -p1
 %patch2 -p1
 %patch3 -p1
+
+cp -p %{SOURCE1} pubkeys
 
 %build
 CFLAGS="%{rpmcflags} %{rpmcppflags}" \
