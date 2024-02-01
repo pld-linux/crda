@@ -15,6 +15,7 @@ Source0:	https://www.kernel.org/pub/software/network/crda/%{name}-%{version}.tar
 Patch0:		%{name}-regdb.patch
 Patch1:		%{name}-destdir.patch
 Patch2:		%{name}-link.patch
+Patch3:		build.patch
 URL:		http://wireless.kernel.org/en/developers/Regulatory/CRDA
 BuildRequires:	libgcrypt-devel
 BuildRequires:	libnl-devel >= 1:3.2
@@ -72,6 +73,7 @@ Pliki nagłówkowe biblioteki CRDA libreg.
 %patch0 -p1
 %patch1 -p1
 %patch2 -p1
+%patch3 -p1
 
 %build
 CFLAGS="%{rpmcflags} %{rpmcppflags}" \

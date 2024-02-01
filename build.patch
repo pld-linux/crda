@@ -1,0 +1,33 @@
+From 067d961a344b4a2b2c374cfba5a632f0652971e2 Mon Sep 17 00:00:00 2001
+From: Jelle van der Waa <jelle@vdwaa.nl>
+Date: Mon, 4 Dec 2017 21:52:39 +0100
+Subject: crda: Fix error: `keys’ defined but not used
+MIME-Version: 1.0
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 8bit
+
+Fix error: ‘keys’ defined but not used [-Werror=unused-const-variable=]
+by informing GCC keys is unused.
+
+Signed-off-by: Jelle van der Waa <jelle@vdwaa.nl>
+Signed-off-by: Luis R. Rodriguez <mcgrof@kernel.org>
+---
+ utils/key2pub.py | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+
+diff --git a/utils/key2pub.py b/utils/key2pub.py
+index 3e84cd2..9bb04cd 100755
+--- a/utils/key2pub.py
++++ b/utils/key2pub.py
+@@ -115,7 +115,7 @@ struct key_params {
+ 	.n = _n, .len_n = sizeof(_n),	\
+ }
+ 
+-static const struct key_params keys[] = {
++static const struct key_params __attribute__ ((unused)) keys[] = {
+ ''')
+     for n in xrange(n + 1):
+         output.write('	KEYS(e_%d, n_%d),\n' % (n, n))
+-- 
+cgit 1.2.3-korg
+
